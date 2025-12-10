@@ -1,0 +1,384 @@
+{
+  "name": "My workflow 5",
+  "nodes": [
+    {
+      "parameters": {
+        "text": "={{ $json.body }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "name ",
+              "description": "extract the name ",
+              "required": true
+            },
+            {
+              "name": "city ",
+              "description": "extract from where he is "
+            },
+            {
+              "name": "phone number ",
+              "description": "extract the phone number ",
+              "required": true
+            },
+            {
+              "name": "email",
+              "description": "extract the email",
+              "required": true
+            },
+            {
+              "name": "experience",
+              "type": "number",
+              "description": "extract how many years of experience ",
+              "required": true
+            },
+            {
+              "name": "position ",
+              "description": "extract the possible position ",
+              "required": true
+            },
+            {
+              "name": "language ",
+              "description": "extract what languages does he speak ",
+              "required": true
+            },
+            {
+              "name": "skills ",
+              "description": "extract the skills that he has"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        832,
+        0
+      ],
+      "id": "37fdef35-e208-4af2-8143-1c60b93793fe",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        208
+      ],
+      "id": "10144960-5e6f-422f-8106-2c1d722a5227",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "3YtkUomA0oNfB4Sd",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1YSbtHSGte21odQSSWZ3egZmZSQWJHV1bfCug6fCfPco",
+          "mode": "list",
+          "cachedResultName": "Job Applications ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YSbtHSGte21odQSSWZ3egZmZSQWJHV1bfCug6fCfPco/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YSbtHSGte21odQSSWZ3egZmZSQWJHV1bfCug6fCfPco/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.output['name '] }}",
+            "position ": "={{ $json.output['position '] }}",
+            "email": "={{ $json.output.email }}",
+            "skills ": "={{ $json.output['skills '] }}",
+            "phone number ": "='{{ $json.output['phone number '] }}",
+            "years of experience ": "={{ $json.output['experience'] }}",
+            "languages ": "={{ $json.output['language '] }}",
+            "city": "={{ $json.output['city '] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "position ",
+              "displayName": "position ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "skills ",
+              "displayName": "skills ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "years of experience ",
+              "displayName": "years of experience ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "languages ",
+              "displayName": "languages ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone number ",
+              "displayName": "phone number ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1152,
+        0
+      ],
+      "id": "18ba9fc9-31a6-4214-9b6a-0456a2fc3485",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PePLw7UFDoXYNnuQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtMinute": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e4f78b70-03c5-4c36-912f-0590cc720608",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "simple": false,
+        "filters": {
+          "q": "subject:(job application OR application OR resume OR cv) has:attachment filename:pdf"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3db79e23-6bff-4a99-97a6-f466f4a70707",
+      "name": "Get many messages",
+      "webhookId": "709796ee-8fc6-4694-bfec-75f48154bd52",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fsRtHgflIV725Ffq",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "Convert from PDF",
+        "url": "={{ $json.url }}",
+        "advancedOptions": {}
+      },
+      "type": "n8n-nodes-pdfco.PDFco Api",
+      "typeVersion": 1,
+      "position": [
+        576,
+        0
+      ],
+      "id": "fc1ebe14-abf7-45ce-9bca-4439b41c08c5",
+      "name": "PDFco Api",
+      "credentials": {
+        "pdfcoApi": {
+          "id": "HLDCcIyuG0vTX0Fv",
+          "name": "PDF.co account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "Upload File to PDF.co",
+        "binaryData": true,
+        "binaryPropertyName": "attachment_0",
+        "name": "="
+      },
+      "type": "n8n-nodes-pdfco.PDFco Api",
+      "typeVersion": 1,
+      "position": [
+        400,
+        0
+      ],
+      "id": "5c05d67d-ab84-44fe-982c-aae8538ab6c7",
+      "name": "PDFco Api1",
+      "credentials": {
+        "pdfcoApi": {
+          "id": "HLDCcIyuG0vTX0Fv",
+          "name": "PDF.co account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get many messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many messages": {
+      "main": [
+        [
+          {
+            "node": "PDFco Api1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDFco Api1": {
+      "main": [
+        [
+          {
+            "node": "PDFco Api",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDFco Api": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4fde7264-3218-4fa7-9c55-90f789dab53f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "36c3a2e4531ac8f112a206cd0e57fdb25fc7f941bf86c11d683cdb10c51c3c26"
+  },
+  "id": "RdsHjeWOv89b9nuO",
+  "tags": []
+}
